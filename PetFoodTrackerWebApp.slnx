@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+  </Folder>
+  <Project Path="frontend/frontend.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+  <Project Path="PetFoodTrackerWebApp.AppHost/PetFoodTrackerWebApp.AppHost.csproj" />
+  <Project Path="PetFoodTrackerWebApp.Server/PetFoodTrackerWebApp.Server.csproj" />
+</Solution>
