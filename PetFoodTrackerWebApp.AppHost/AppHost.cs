@@ -1,13 +1,26 @@
-var builder = DistributedApplication.CreateBuilder(args);
 
-var server = builder.AddProject<Projects.PetFoodTrackerWebApp_Server>("server")
-    .WithHttpHealthCheck("/health")
-    .WithExternalHttpEndpoints();
+namespace PetFoodTrackerWebApp.AppHost
+{
+    public class AppHost
+    {
+        private static async Task Main(string[] args)
+        {
+            var builder = DistributedApplication.CreateBuilder(args);
 
-var webfrontend = builder.AddViteApp("webfrontend", "../frontend")
-    .WithReference(server)
-    .WaitFor(server);
+            var server = builder.AddProject<Projects.PetFoodTrackerWebApp_Server>("server")
+                .WithHttpHealthCheck("/health")
+                .WithExternalHttpEndpoints();
 
-server.PublishWithContainerFiles(webfrontend, "wwwroot");
+            var webfrontend = builder.AddViteApp("webfrontend", "../frontend")
+                .WithReference(server)
+                .WaitFor(server);
 
-builder.Build().Run();
+            server.PublishWithContainerFiles(webfrontend, "wwwroot");
+
+            await builder.Build().RunAsync();
+        }
+    }
+}
+
+
+
